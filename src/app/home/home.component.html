@@ -34,7 +34,7 @@
 		  <a mat-button [routerLink]="['/viewBlog', blog.id]">VIEW</a>
 		  
 			<!-- Button trigger modal -->
-			<button mat-button type="button" data-toggle="modal" data-target="#exampleModal" (click)="blogId=blog.id">
+			<button mat-button  *ngIf="isLogged" type="button" data-toggle="modal" data-target="#exampleModal" (click)="blogId=blog.id">
 				delete
 			</button>
   
