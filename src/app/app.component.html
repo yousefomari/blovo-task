@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row class="justify-content-between">
+    <button [routerLink]="['/home']" mat-button>Main</button>
+    <span class="spacer"></span>
+    <button *ngIf="!isLogged" [routerLink]="['/login']" mat-button>
+      Login
+	</button>
+	<button *ngIf="isLogged" [routerLink]="['/users']" mat-button>
+		Users
+	  </button>
+    <button *ngIf="!isLogged" [routerLink]="['/register']" mat-button>
+      Register
+    </button>
+    <button *ngIf="isLogged" (click)="logout()" mat-button>Logout</button>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

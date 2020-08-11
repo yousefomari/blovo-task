@@ -1,0 +1,51 @@
+<div>
+	<h1 class="mb-5"> User List Page </h1>
+	<table class="table" *ngIf="users">
+		<thead>
+		  <tr>
+			<th scope="col">#</th>
+			<th scope="col">Name</th>
+			<th scope="col">User Name</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  <tr *ngFor="let user of users">
+			<th>{{user.id}}</th>
+			<td>{{user.name}}</td>
+			<td>{{user.username}}</td>
+		  </tr>
+		</tbody>
+	  </table>
+
+	  <nav
+      class="d-flex justify-content-end mt-5 mr-3"
+      aria-label="Page navigation example"
+    >
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [ngClass]="{ disabled: pageNumber == 1 }">
+          <button
+            class="page-link"
+            tabindex="-1"
+            aria-disabled="true"
+            (click)="getUsersForPage('decrement')"
+          >
+            Previous
+          </button>
+        </li>
+        <li class="page-item">
+          <button class="page-link" (click)="getUsersForPage('', 1)">1</button>
+        </li>
+        <li class="page-item">
+          <button class="page-link" (click)="getUsersForPage('', 2)">2</button>
+        </li>
+        <li class="page-item">
+          <button class="page-link" (click)="getUsersForPage('', 3)">3</button>
+        </li>
+        <li class="page-item" [ngClass]="{ disabled: last }">
+          <button class="page-link" (click)="getUsersForPage('increment')">
+            Next
+          </button>
+        </li>
+      </ul>
+	</nav>
+</div>

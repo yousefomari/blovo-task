@@ -1,0 +1,107 @@
+<div class="h-100">
+  <div class="d-flex justify-content-end my-2 mr-3" *ngIf="isLogged">
+    <a
+      [routerLink]="['/createBlog']"
+      class="btn btn-primary btn-sm btn-lg active"
+      role="button"
+      aria-pressed="true"
+    >
+      + Create New Blog!
+    </a>
+  </div>
+
+  <div class="d-flex flex-wrap">
+    <div class="w-25 p-3" *ngFor="let blog of blogs">
+      <mat-card class="example-card full-height">
+        <img
+          mat-card-image
+          src="{{ blog.blogImage }}"
+          alt="Photo of a Shiba Inu"
+        />
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{ blog.name }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p [innerHTML]="blog.description"></p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button *ngIf="isLogged" (click)="likeBlog(blog)">
+				  LIKE
+				  <span class="badge badge-light">{{blog.likes}}</span>
+			</button>
+		  <a mat-button [routerLink]="['/viewBlog', blog.id]">VIEW</a>
+		  
+			<!-- Button trigger modal -->
+			<button mat-button type="button" data-toggle="modal" data-target="#exampleModal" (click)="blogId=blog.id">
+				delete
+			</button>
+  
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  <div>
+    <nav
+      class="d-flex justify-content-end mt-5 mr-3"
+      aria-label="Page navigation example"
+    >
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [ngClass]="{ disabled: pageNumber == 1 }">
+          <button
+            class="page-link"
+            tabindex="-1"
+            aria-disabled="true"
+            (click)="getBlogsForPage('decrement')"
+          >
+            Previous
+          </button>
+        </li>
+        <li class="page-item">
+          <button class="page-link" (click)="getBlogsForPage('', 1)">1</button>
+        </li>
+        <li class="page-item">
+          <button class="page-link" (click)="getBlogsForPage('', 2)">2</button>
+        </li>
+        <li class="page-item">
+          <button class="page-link" (click)="getBlogsForPage('', 3)">3</button>
+        </li>
+        <li class="page-item" [ngClass]="{ disabled: last }">
+          <button class="page-link" (click)="getBlogsForPage('increment')">
+            Next
+          </button>
+        </li>
+      </ul>
+	</nav>
+	
+
+
+
+	
+  </div>
+  
+</div>
+
+ <!-- Modal -->
+ <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Delete Blog!</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  are you sure!!
+		</div>
+		<div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-danger" (click)="deleteBlog()" data-dismiss="modal">Delete!</button>
+		</div>
+	  </div>
+	</div>
+  </div>
+
+ 
